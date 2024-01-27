@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import {sequelize} from '../config/db';
+import {sequelize} from '../config/db.js';
 
 const Product = sequelize.define('products', {
   id: {
@@ -8,7 +8,7 @@ const Product = sequelize.define('products', {
     primaryKey: true,
   },
   name: {
-    type: DataTypes.VARCHAR(100),
+    type: DataTypes.STRING(100),
     defaultValue: 0,
     allowNull: false,
   },
@@ -19,14 +19,15 @@ const Product = sequelize.define('products', {
   },
   ref: {
     type: DataTypes.STRING(50),
+    unique: true,
     allowNull: false,
   },
   amount: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DOUBLE,
     allowNull: false,
   },
   rate: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.FLOAT,
     allowNull: false,
   },
   createdAt: {

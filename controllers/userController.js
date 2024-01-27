@@ -1,6 +1,5 @@
 import {sequelize} from '../config/db.js'
 import {User} from '../models/user.js'
-// import {isValidEmail,isValidPassword,isValidName} from '../tool/js'
 
 const createUser = async (req, res) => {
   let transaction;
@@ -9,22 +8,6 @@ const createUser = async (req, res) => {
     const { email, password, firstname, lastname, phone, birth } = req.body;
 
     let transaction = await sequelize.transaction();
-
-    // if (!isValidEmail(email)) {
-    //   throw new Error("L'adresse e-mail n'est pas valide.");
-    // }
-
-    // if (!isValidPassword(password)) {
-    //   throw new Error("Le mot de passe n'est pas valide.");
-    // }
-
-    // if (!isValidName(firstname)) {
-    //   throw new Error("Le prénom n'est pas valide.");
-    // }
-
-    // if (!isValidName(lastname)) {
-    //   throw new Error("Le nom de famille n'est pas valide.");
-    // }
 
     const newUser = await User.create(
       {
@@ -97,22 +80,6 @@ const updateUser = async (req, res) => {
       return res.status(404).send({ error: 'Utilisateur non trouvé' });
     }
 
-    // if (email && !isValidEmail(email)) {
-    //   throw new Error("L'adresse e-mail n'est pas valide.");
-    // }
-
-    // if (password && !(isValidPassword(password))){
-    //   throw new Error('Le mot de passe n\'est pas valide.');
-    // }
-
-    // if (firstname && !(isValidName(firstname))){
-    //   throw new Error('Le nom n\'est pas valide.');
-    // }
-
-    // if (lastname && !(isValidName(lastname))){
-    //   throw new Error('Le nom n\'est pas valide.');
-    // }
-
     const updatedUser = await existingUser.update({
       email: email || existingUser.email,
       password: password || existingUser.password,
@@ -124,7 +91,16 @@ const updateUser = async (req, res) => {
 
     res.status(200).send({user: updatedUser});
   } catch (error) {
-    res.status(500).send({ error: error.message });
+    
+    if (error.name === 'SequelizeUniqueConstraintError') {
+      res.status(400).send({ error: 'Adresse e-mail déjà utilisée.' });
+
+    } else if (error.name === 'ValidationError') {
+      res.status(400).send({ error: 'Données utilisateur non valides.' });
+
+    } else {
+      res.status(500).send({ error: 'Erreur interne du serveur.' });
+    }
   }
 };
 
@@ -135,7 +111,7 @@ const deleteUser = async (req, res) => {
     const userToDelete = await User.findByPk(userId);
 
     if (!userToDelete) {
-      return res.status(404).send({ error: 'Association non trouvée' });
+      return res.status(404).send({ error: 'Utilisateur non trouvé' });
     }
 
     await userToDelete.destroy();

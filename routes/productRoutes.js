@@ -1,12 +1,12 @@
-import {productController} from '../controllers/productController.js';
+import {  createProduct,  getAllProducts,  getOneProduct,  updateProduct,  deleteProduct} from '../controllers/productController.js';
 
 function productRoutes(fastify, options, done) {
 
-  fastify.post('/products', productController.createProduct);
-  fastify.get('/products', productController.getAllProducts);
-  fastify.get('/products/:id', productController.getOneProduct);
-  fastify.put('/products/:id', productController.updateProduct);
-  fastify.delete('/products/:id', productController.deleteProduct);
+  fastify.post('/products', createProduct);
+  fastify.get('/products', getAllProducts);
+  fastify.get('/products/:id', getOneProduct);
+  fastify.put('/products/:id', updateProduct);
+  fastify.delete('/products/:id', deleteProduct);
 
   done();
 }
