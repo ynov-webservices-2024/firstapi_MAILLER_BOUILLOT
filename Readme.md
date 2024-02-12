@@ -191,3 +191,9 @@ avec sequelize :
 #### Les inconvénients de Fastify
 
 - La communauté liée à Fastify reste très restreinte (il n'y a presque pas d'article sur stackoverflow par exemple). En cas de problème lors du dévelopement on peut rapidement se retrouver confronter à nous même.
+
+<div style="text-align: center;">
+
+Recherche Autour de Fastify > [Rest Api WarmUp - FASTIFY.pdf](<Rest Api WarmUp - FASTIFY.pdf>)
+
+</div>
