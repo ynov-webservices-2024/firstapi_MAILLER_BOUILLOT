@@ -9,23 +9,25 @@ const fastify = Fastify({
 })
 
 // Enregistrer les routes
+fastify.get('/', async function handler (request, reply) {
+  return { hello: 'world' }
+})
 fastify.register(userRoutes);
 fastify.register(productRoutes);
 fastify.register(orderRoutes);
 
 // Synchroniser le modèle avec la base de données
 sequelize.sync({ force: false })
-  .then(() => {
-    console.log('Base de données synchronisée');
-  })
-  .catch(err => {
-    console.error('Erreur lors de la synchronisation de la base de données', err);
-  });
-
-fastify.listen({ port: 3000 }, function (err, address) {
-  if (err) {
-    fastify.log.error(err)
-    process.exit(1)
-  }
-  console.log('Server is running on http://localhost:3000');
+.then(() => {
+  console.log('Base de données synchronisée');
+})
+.catch(err => {
+  console.error('Erreur lors de la synchronisation de la base de données', err);
 });
+
+try {
+  await fastify.listen({ port: 3000 })
+} catch (err) {
+  fastify.log.error(err)
+  process.exit(1)
+}

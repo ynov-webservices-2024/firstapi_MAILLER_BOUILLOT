@@ -45,7 +45,7 @@ const getAllOrders = async (req, res) => {
           attributes: ['id', 'name', 'description', 'amount', 'rate']
         }
       ],
-      attributes : ['createdAt'],
+      attributes : ['id', 'createdAt'],
     });
 
     if (!order) {
@@ -75,7 +75,7 @@ const getOneOrder = async (req, res) => {
           attributes: ['id', 'name', 'description', 'amount', 'rate']
         }
       ],
-      attributes : ['createdAt'],
+      attributes : ['id', 'createdAt'],
     });
 
     if (!order) {
@@ -109,7 +109,7 @@ const getUserOrder = async (req, res) => {
           attributes: ['id', 'name', 'description', 'amount', 'rate']
         }
       ],
-      attributes : ['createdAt'],
+      attributes : ['id', 'createdAt'],
       where : 
         {
           user_id: userId
