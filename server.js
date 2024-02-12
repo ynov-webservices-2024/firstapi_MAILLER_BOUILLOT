@@ -9,9 +9,6 @@ const fastify = Fastify({
 })
 
 // Enregistrer les routes
-fastify.get('/', async function handler (request, reply) {
-  return { hello: 'world' }
-})
 fastify.register(userRoutes);
 fastify.register(productRoutes);
 fastify.register(orderRoutes);
