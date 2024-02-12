@@ -2,7 +2,7 @@
 
 Ayant l'habitude de travailler avec le Framework Express, l'objectif de ce projet était de comprendre les principales différences entre ce Framework et Fastify.
 
-Après avoir réalisé notre première API REST, nous avons pu voir qu'en réalité ces deux languages sont très similaires.
+Après avoir réalisé notre première API REST, nous avons pu voir qu'en réalité ces deux frameworks sont très similaires.
 
 #### Architecture du projet
 
